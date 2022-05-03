@@ -22,8 +22,10 @@ public:
     bool heap_empty();
     double score_sum();
     double score_average();
-    void node_delete_by_name(string name);
+    int node_delete_by_name(string name);
 };
+double summation(element e[], int troot, int n);
+int delete_node(element e[], int troot, string tname, int n);
 int main()
 {
     element a[10] = { {"Kim",88}, {"Lee", 77}, {"Park", 98}, {"Choi", 74}, {"Ryu",94}, {"Cho", 85}  };
@@ -120,16 +122,15 @@ bool my_heap::heap_empty(){
 }
 
 double my_heap::score_sum(){
-    double sum = 0;
-
-    for(int i = 0; i<csize+1; i++)
-        sum+=h[i].score;
-
-    return sum;
+    return summation(h,1,csize);
+}
+double summation(element e[], int troot, int n){
+    if(troot>n)
+        return 0;
+    return (e[troot].score+summation(e, 2*troot, n))+summation(e, 2*troot +1, n); // root + left subtree + right subtree
 }
 double my_heap::score_average(){
-    double sum = score_sum();
-    return sum/csize;
+    return score_sum()/csize;
 }
 
 void my_heap::adjust(int t_root){
@@ -154,31 +155,46 @@ void my_heap::adjust(int t_root){
     h[child/2] = tmp;
 }
 
-void my_heap::node_delete_by_name(string name){
+int my_heap::node_delete_by_name(string tname){
+    if(csize == 0)
+        return 0;
+    
+    if(delete_node(h, 1, tname, csize)==1){
+        csize--;
+        return 1;
+    }
+    else
+        return 0;
+}
+
+
+int delete_node(element e[], int troot, string tname, int n){
     element t;
     element temp;
     int parent, child;
+    int csize = n;
 
     for(int i = 0; i<csize; i++){
-        if(name == h[i].name){ 
-            t = h[i];
+        if(tname == e[i].name){ 
+            t = e[i];
             parent = i;
             break;
         }   
     }
-    temp = h[csize];
+    temp = e[csize];
     csize--;
 
     while(child<=csize){
-        if((child<csize)&&(h[child].score)<h[child+1].score)
+        if((child<csize)&&(e[child].score)<e[child+1].score)
             child++;
-        if(temp.score>=h[child].score)
+        if(temp.score>=e[child].score)
             break;
-        h[parent] = h[child];
+        e[parent] = e[child];
         parent = child;
         child*=2;
 
     }
-    h[parent] = temp;
+    e[parent] = temp;
 
+    return 1;
 }
