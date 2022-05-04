@@ -153,7 +153,7 @@ bst_node bst_tree::search(string tid){
             else 
                 p = p->right;
         }
-        else{
+        else if(p->s_id > tid){
             if(p->left == NULL){
                 cout<<"The key "<<tid<<" does not exist.\n";
                 return tmp;                 

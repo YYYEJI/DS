@@ -1,6 +1,7 @@
 /* linked list 
 과제 03번 ~ 07번까지 본인에 제출한 과제 중 한 개를 선택하여,
 Stack (또는 queue) 를 Linked List 를 사용하여 구현한 버전으로 수정(재작성)하여 제출
+
 6번 풀었습니다!
 */
 #include <iostream>
