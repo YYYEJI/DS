@@ -7,9 +7,9 @@ using namespace std;
 // file 선언하면 file open은 자동으로 수행
 
 int main(){
-    ifstream f1("a.dat");
-    ofstream f2("b.dat");   
-    int a, b;
+    ifstream f1("a.dat");     // input file stream
+    ofstream f2("b.dat");     // output file stream   
+    int a, b; 
     if(!f1) 
         cout<<"File open error: the file does not exist.\n";
     else{
