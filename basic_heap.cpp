@@ -74,9 +74,10 @@ element my_heap::delete_heap(){
 
     t = h[1];                  // for return value, 첫원소
     temp = h[csize];           // end of element, 끝원소
-    csize--;
+    csize--;                   
     parent = 1;                // root
     child = 2;                 // left child of root
+
     while(child<=csize){       // there is child
         if((child<csize)&&(h[child].score<h[child+1].score))  // right child 존재하고, right child가 크면
             child++;           // choose the right child
