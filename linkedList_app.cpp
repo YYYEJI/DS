@@ -75,6 +75,7 @@ void my_list::add_to_head(node t){
     node *p;
     p = new node;
     (*p) = t;
+
     p->link = head;
     head = p;
     if(tail == NULL) tail = p;
@@ -83,7 +84,8 @@ void my_list::add_to_tail(node t){
     node *p;
     p = new node;
     (*p) = t;
-    p->link = NULL;             // 이전 node의 link에서 새로 들어온 node의 link와 연결
+
+    p->link = NULL;         
     if(tail!=NULL) tail -> link  = p;
     else head = p;
 
@@ -92,9 +94,11 @@ void my_list::add_to_tail(node t){
 node my_list::delete_from_head(){
     node temp;
     node *t;                    // delete하기 위해서 기억하는 장소, head가 옮겨지면 그 node는 어딘가에서 돌아댕김 
+   
     t = head;        
     temp = *head;               // return 될 값 삭제 전 저장
     head = head -> link;        // head에서 삭제된 다음 Node와 연결
+   
     delete t;                   // node 삭제 
     if(head == NULL) tail = NULL;
  
@@ -118,24 +122,23 @@ double my_list::score_sum(){
 double my_list::get_score(string t_name){
     node *t;
     for(t = head; t!=NULL; t = t->link){
-        if(t->name == t_name) {
+        if(t->name == t_name) 
             return t->score;
-            break;
-        }
+
     }
     return 0;
 }
 int my_list::remove_a_node(string t_name){ 
-    node *pre_temp;    // 진행하고 있는 상황에서 앞 전 노드/ *를 지워야되나요?
+    node *pre_node;    // 진행하고 있는 상황에서 앞 전 노드/ *를 지워야되나요?
     node *t;
     for(t = head; t!=NULL; t = t->link){
         if (t->name == t_name) {
             // t = t->link;
-            pre_temp->link = t->link;
+            pre_node->link = t->link;
             delete t;
             return 1;
         }
-        pre_temp = t;
+        pre_node = t;
     }
     return 0;
 
@@ -167,8 +170,8 @@ bool list_equal(my_list a, my_list b){
     return is_equal(a.head, b.head);
 }
 bool is_equal(node *p1, node *p2){
-    if((p1 == NULL) && (p2 == NULL)) return true;   // 둘 다 null 이면 true
-    if((p1 == NULL) || (p2 == NULL)) return false;  // 하나만 null 이면 false
+    if((p1 == NULL) && (p2 == NULL)) return true;     // 둘 다 null 이면 true
+    if((p1 == NULL) || (p2 == NULL)) return false;    // 하나만 null 이면 false
     if(equal_data(*p1, *p2)) return (is_equal(p1->link, p2->link));
     else return false;
 }
