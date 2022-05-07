@@ -79,7 +79,7 @@ bool IntoPost::stack_empty(){
     else return false;
 }
 char IntoPost::top_element(){
-    return list[top-1];
+    return list[top-1];         
 }
 bool is_operand(char s){
     if((s == '(') || (s == ')')||
