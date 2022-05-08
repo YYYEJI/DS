@@ -10,10 +10,10 @@ public:
 };
 class my_heap{
     element h[HSIZE];
-    int csize;           // The number of elements
+    int csize;              // The number of elements
 public:
     my_heap();
-    int h_size();          // heap size
+    int h_size();           // heap size
     void insert_heap(element e);
     element delete_heap();
     bool heap_full();
@@ -61,29 +61,29 @@ void my_heap::insert_heap(element e){
     csize++;
     k = csize;
 
-    while((k!=1)&&(e.score>h[k/2].score)){   // k!=1 -> root X
-        h[k] = h[k/2];
-        k/=2;
+    while((k!=1)&&(e.score>h[k/2].score)){   // k!=1 -> root X, key value of child > key value of parent
+        h[k] = h[k/2];                       // child value = parent value
+        k/=2;                                // location => child -> parent
     }
-    h[k] = e;
+    h[k] = e;                                
 }
 element my_heap::delete_heap(){
     element t;
     element temp;
-    int parent, child;         // 위치정보 기억
+    int parent, child;                       // 위치정보 기억
 
-    t = h[1];                  // for return value, 첫원소
-    temp = h[csize];           // end of element, 끝원소
+    t = h[1];                                // for return value, 첫원소
+    temp = h[csize];                         // end of element, 끝원소
     csize--;                   
-    parent = 1;                // root
-    child = 2;                 // left child of root
+    parent = 1;                              // root
+    child = 2;                               // left child of root
 
-    while(child<=csize){       // there is child
+    while(child<=csize){                     // child exists
         if((child<csize)&&(h[child].score<h[child+1].score))  // right child 존재하고, right child가 크면
-            child++;           // choose the right child
-        if(temp.score>=h[child].score)      // 기존 원소의 score value와 선택한 child의 score value 비교해서 기존 value가 크면
+            child++;                         // choose the right child
+        if(temp.score>=h[child].score)       // 기존 원소의 score value와 선택한 child의 score value 비교해서 기존 value가 크면
             break;
-        h[parent] = h[child];  // child 값 parent 자리로 끌어올림
+        h[parent] = h[child];                // child 값 parent 자리로 끌어올림
         parent = child;
         child *= 2; 
     } 
@@ -92,7 +92,7 @@ element my_heap::delete_heap(){
     return t;
 }
 bool my_heap::heap_full(){
-    if(csize>=HSIZE-1) return true;   // Because we don't use index 0 of array
+    if(csize>=HSIZE-1) return true;         // Because we don't use index 0 of array
     else return false;
 }
 bool my_heap::heap_empty(){
