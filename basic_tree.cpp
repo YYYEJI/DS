@@ -33,6 +33,7 @@ double sum_allnodes(node *p);
 void inorder_print(node *p);
 void preorder_print(node *p);
 void postorder_print(node *p);
+
 int main()
 {
     my_tree thetree;
@@ -66,8 +67,8 @@ my_tree::my_tree(){     // constructor: 초기 empty 상태
     root = NULL;
 }
 int my_tree::insert_root(node t){
-    if(root!=NULL)
-        return 0;
+    if(root!=NULL) return 0;        
+
     node *p;
     p = new node;
     (*p) = t;
@@ -76,6 +77,7 @@ int my_tree::insert_root(node t){
     p->right =NULL;
     root = p;
     node_count ++;
+
     return 1;    
 }
 int my_tree::insert_left(string tname, node tnode){
@@ -86,18 +88,21 @@ int my_tree::insert_left(string tname, node tnode){
         node_count++;
     return result;
 }
-int node_insert_left(node *p, string tname, node tnode){
+int node_insert_left(node *p, string tname, node tnode){    // root, 찾을 Node의 name, 생성할 node의 값
     int result;
-    if (p == NULL) return 0;
-    if (p->name == tname) {
-        if (p->left != NULL) return -1;
+
+    if (p == NULL) return 0;              // root가 존재하지 않을 경우 
+    if (p->name == tname) {               // root가 tname일 경우
+        if (p->left != NULL) return -1;   // tname의 node를 찾았는데 left child가 있을 경우
+
         node *t;
         t = new node;
-        
         (*t) = tnode;
-        t->left = NULL;
-        t->right = NULL;
-        p->left = t;
+
+        t->left = NULL;                   // left child NULL
+        t->right = NULL;                  // right child NULL
+        p->left = t;                     
+
         return 1;
     }
     else {
@@ -116,22 +121,25 @@ int my_tree::insert_right(string tname, node tnode){
 }
 int node_insert_right(node *p, string tname, node tnode){
     int result;
+     
     if (p == NULL) return 0;
     if (p->name == tname) {
         if (p->right != NULL) return -1;
+
         node *t;
         t = new node;
-        
         (*t) = tnode;
+
         t->left = NULL;
         t->right = NULL;
         p->right = t;
+
         return 1;
     }
     else {
         result = node_insert_right(p->left, tname, tnode);
-        if (result != 0)return result;
-        return node_insert_right(p->right, tname,tnode);
+        if (result != 0) return result;
+        return node_insert_right(p->right, tname, tnode);
     }
 }
 double my_tree::score_sum(){
@@ -139,7 +147,7 @@ double my_tree::score_sum(){
 }
 double sum_allnodes(node *p){
     if(p==NULL) return 0;
-    else return sum_allnodes(p->left)+sum_allnodes(p->right)+p->score;
+    else return sum_allnodes(p->left)+sum_allnodes(p->right)+p->score;      // left child + right child + root
 }
 double my_tree::score_average(){
     return score_sum()/node_count;
@@ -150,7 +158,7 @@ void my_tree::print_data_inorder(){
 void inorder_print(node *p){
     if(p == NULL) return ;
 
-    inorder_print(p->left);
+    inorder_print(p->left);                                                  
     cout<<p->name<<" : "<<p->score<<"\n";
     inorder_print(p->right);
 }
