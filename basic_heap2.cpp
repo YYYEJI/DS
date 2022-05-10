@@ -147,10 +147,8 @@ void my_heap::adjust(int t_root){
             child++;
         if(tmpkey>h[child].score)
             break;
-        else{
-            h[child/2] = h[child];
-            child *= 2;
-        }
+        h[child/2] = h[child];
+        child *= 2;
     }
     h[child/2] = tmp;
 }
