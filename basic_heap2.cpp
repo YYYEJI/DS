@@ -167,15 +167,15 @@ int my_heap::node_delete_by_name(string tname){
 
 
 int delete_node(element e[], int troot, string tname, int n){
-    element t;
-    element temp;
+    element t;            // parent node
+    element temp;         // last node
     int parent, child;
     int csize = n;
 
     for(int i = 0; i<csize; i++){
         if(tname == e[i].name){ 
             t = e[i];
-            parent = i;
+            parent = i;   // i번째 node 부터 조정
             break;
         }   
     }
