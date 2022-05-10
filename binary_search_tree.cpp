@@ -101,7 +101,7 @@ void bst_tree::insert_node(bst_node t){
             cout<<"Insertion Failed : the Key "<<t.s_id<<"already exists."<<endl;
             return ;
         }
-        if(p->s_id<t.s_id){
+        if(p->s_id<t.s_id){           // new node의 key 값이 큰 경우
             if(p->right == NULL){
                 p->right = tmp;
                 return;
@@ -109,7 +109,7 @@ void bst_tree::insert_node(bst_node t){
             else 
                 p=p->right;
         }
-        else{
+        else{                         // new node의 key 값이 작은 경우
             if(p->left == NULL){
                 p->left = tmp;
                 return;
