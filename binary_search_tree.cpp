@@ -75,20 +75,20 @@ bst_tree::bst_tree(){
     csize = 0;
 }
 bool bst_tree::empty(){
-    if(csize == 0) return true;
+    if(root == NULL) return true;
     else return false;
 }
 int bst_tree::size(){
     return csize;
 }
 void bst_tree::insert_node(bst_node t){
-    bst_node* p;      // To find the t
-    bst_node* tmp;    // To return the t
+    bst_node* p;           // For root node
+    bst_node* tmp;         // For create new node
 
     tmp = new bst_node;
-    *tmp = t;
-    tmp -> left = NULL;      // left node
-    tmp -> right = NULL;     // left node
+    *tmp = t;                
+    tmp->left = NULL;      // left node
+    tmp->right = NULL;     // left node
 
     if(root == NULL){
         root = tmp;
@@ -97,11 +97,11 @@ void bst_tree::insert_node(bst_node t){
 
     p = root;
     while(1){
-        if(p->s_id == t.s_id){
+        if(p->s_id == t.s_id){          // key already exists.
             cout<<"Insertion Failed : the Key "<<t.s_id<<"already exists."<<endl;
             return ;
         }
-        if(p->s_id<t.s_id){           // new node의 key 값이 큰 경우
+        if(p->s_id<t.s_id){             // new node의 key 값이 큰 경우
             if(p->right == NULL){
                 p->right = tmp;
                 return;
@@ -109,7 +109,7 @@ void bst_tree::insert_node(bst_node t){
             else 
                 p=p->right;
         }
-        else{                         // new node의 key 값이 작은 경우
+        else{                           // new node의 key 값이 작은 경우
             if(p->left == NULL){
                 p->left = tmp;
                 return;
@@ -135,7 +135,7 @@ bst_node bst_tree::search(string tid){
     bst_node* p;
     p = root;
     
-    bst_node tmp;           
+    bst_node tmp;          
     tmp.set_data("00000000", "None", -1);
 
     if(root == NULL){
