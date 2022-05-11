@@ -18,7 +18,7 @@ class bst_tree{
 public:
     bst_tree();              
     bool empty();
-    int size();
+    int size();               // return csize
     void insert_node(bst_node t);
     void show_inorder();
     bst_node search(string tid);    // s_id
@@ -145,7 +145,7 @@ bst_node bst_tree::search(string tid){
     while(1){
         if(p->s_id == tid)
             return (*p);
-        if(p->s_id < tid){
+        if(p->s_id < tid){           // If tid is greater than p->s_id
             if(p->right == NULL){
                 cout<<"The key "<<tid<<" does not exist.\n";
                 return tmp;                
@@ -153,8 +153,8 @@ bst_node bst_tree::search(string tid){
             else 
                 p = p->right;
         }
-        else if(p->s_id > tid){
-            if(p->left == NULL){
+        else if(p->s_id > tid){     // If tid is less than p->s_id
+            if(p->left == NULL){   
                 cout<<"The key "<<tid<<" does not exist.\n";
                 return tmp;                 
             }
