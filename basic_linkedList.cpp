@@ -127,16 +127,16 @@ double my_list::get_score(string t_name){
     return 0;
 }
 int my_list::remove_a_node(string t_name){ 
-    node *pre_temp;                           
+    node *pre_node;                           
     node *t;
 
     for(t = head; t!=NULL; t = t->link){
         if (t->name == t_name) {
-            pre_temp->link = t->link;       // 이전 node와 다음에 올  node 연결
+            pre_node->link = t->link;       // 이전 node와 다음에 올  node 연결
             delete t;                       // delete 현재 node memory 
-            return 0;
+            return 1;
         }
-        pre_temp = t;                       // 이전 node 저장
+        pre_node = t;                       // 이전 node 저장
     }
     return 0;
 
