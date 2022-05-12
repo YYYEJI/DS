@@ -80,11 +80,11 @@ void my_heap::insert_heap(element e){
     int k;
     csize++;
     k = csize;
+
     while((k!=1) && (e.score>h[k/2].score)){
         h[k] = h[k/2];
         k/=2;
     }
-
 }
 element my_heap::delete_heap(){
     element t;
@@ -168,7 +168,7 @@ int my_heap::node_delete_by_name(string tname){
 
 int delete_node(element e[], int troot, string tname, int n){
     element t;            // parent node
-    element temp;         // last node
+    element tmp;          // last node
     int parent, child;
     int csize = n;
 
@@ -176,23 +176,23 @@ int delete_node(element e[], int troot, string tname, int n){
         if(tname == e[i].name){ 
             t = e[i];
             parent = i;   // i번째 node 부터 조정
-            break;
+            break;        // for문 종료
         }   
     }
-    temp = e[csize];
+    tmp = e[csize];
     csize--;
 
     while(child<=csize){
         if((child<csize)&&(e[child].score)<e[child+1].score)
             child++;
-        if(temp.score>=e[child].score)
+        if(tmp.score>=e[child].score)
             break;
         e[parent] = e[child];
         parent = child;
         child*=2;
 
     }
-    e[parent] = temp;
+    e[parent] = tmp;
 
     return 1;
 }
