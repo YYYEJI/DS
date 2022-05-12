@@ -26,9 +26,8 @@ public:
     void print_data_preorder();               // preorder 순서로 모든 Node의 값 출력
     void print_data_postorder();              // postorder 순서로 모든 Node의 값 출력
 };
-// int node_insert_left(node *p, string tname, node t);
-int node_insert_left(node *p, string tname, node tnode);
-int node_insert_right(node *p, string tname, node tnode);
+int node_insert_left(node *p, string tname, node tnode);     // tname node의 left의 new node 추가
+int node_insert_right(node *p, string tname, node tnode);    // tname node의 right의 new node 추가
 double sum_allnodes(node *p);
 void inorder_print(node *p);
 void preorder_print(node *p);
