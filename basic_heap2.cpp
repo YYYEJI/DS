@@ -176,9 +176,10 @@ int delete_node(element e[], int troot, string tname, int n){
         if(tname == e[i].name){ 
             t = e[i];
             parent = i;   // i번째 node 부터 조정
-            break;        // for문 종료
+            break;        // 찾으면 for문 종료
         }   
     }
+    child = parent*2;
     tmp = e[csize];
     csize--;
 
