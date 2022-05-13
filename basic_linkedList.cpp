@@ -3,7 +3,6 @@
 */
 #include <iostream>
 using namespace std;
-
 class node{
 public:
     string name;
@@ -72,7 +71,7 @@ void my_list::add_to_head(node t){
 
     p->link = head;                       // new node의 link를 head가 가르키고 있는 곳에 연결
     head = p;                             // head는 new node에 연결
-    
+
     if(tail == NULL) tail = p;            // linked list가 NULL일 때  node가 추가되면 tail도 new node에 연결
 }
 void my_list::add_to_tail(node t){
