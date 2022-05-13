@@ -4,7 +4,6 @@
 */
 #include <iostream>
 using namespace std;
-#define SIZE 100
 class node{
 public:
     string name;
