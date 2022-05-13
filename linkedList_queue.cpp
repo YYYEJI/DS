@@ -22,6 +22,7 @@ public:
 int main(){
     my_queue a;
     node tmp;
+    
     tmp.set_data("KIM", 22.2);
     a.insert_q(tmp);
     tmp.set_data("LEE", 33.3);
