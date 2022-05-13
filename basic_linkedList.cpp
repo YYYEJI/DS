@@ -72,6 +72,7 @@ void my_list::add_to_head(node t){
 
     p->link = head;                       // new node의 link를 head가 가르키고 있는 곳에 연결
     head = p;                             // head는 new node에 연결
+    
     if(tail == NULL) tail = p;            // linked list가 NULL일 때  node가 추가되면 tail도 new node에 연결
 }
 void my_list::add_to_tail(node t){
@@ -118,11 +119,9 @@ double my_list::score_sum(){
 }
 double my_list::get_score(string t_name){
     node *t;
-    for(t = head; t!=NULL; t = t->link){
-        if(t->name == t_name) {
-            return t->score;
-        }
-    }
+
+    for(t = head; t!=NULL; t = t->link)
+        if(t->name == t_name)  return t->score;
 
     return 0;
 }
@@ -142,6 +141,7 @@ int my_list::remove_a_node(string t_name){
 
 }
 bool my_list::list_empty(){
-    if(head==NULL) return true;
+    if(head==NULL) 
+        return true;
     else return false;
 }
