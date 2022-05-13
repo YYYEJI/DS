@@ -127,7 +127,7 @@ double my_heap::score_sum(){
 double summation(element e[], int troot, int n){
     if(troot>n)
         return 0;
-    return (e[troot].score+summation(e, 2*troot, n))+summation(e, 2*troot +1, n); // root + left subtree + right subtree
+    return (e[troot].score+summation(e, 2*troot, n)+summation(e, 2*troot +1, n)); // root + left subtree + right subtree
 }
 double my_heap::score_average(){
     return score_sum()/csize;
@@ -145,7 +145,7 @@ void my_heap::adjust(int t_root){
     while(child<=csize){
         if((child<csize)&&(h[child].score<h[child+1].score))
             child++;
-        if(tmpkey>h[child].score)
+        if(tmpkey>=h[child].score)
             break;
         h[child/2] = h[child];
         child *= 2;
