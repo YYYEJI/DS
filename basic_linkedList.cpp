@@ -86,8 +86,8 @@ void my_list::add_to_tail(node t){
     tail = p;                             // tail에 new node 연결
 }
 node my_list::delete_from_head(){
-    node temp;                            // 값 return을 위한 node
     node *t;                              // delete하기 위한 node, head가 옮겨지면 그 node는 어딘가에서 돌아댕김 
+    node temp;                            // 값 return을 위한 node
 
     t = head;                             // delete 될 memory 저장
     temp = *head;                         // return 될 값 delete 전 저장
