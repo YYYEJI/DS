@@ -7,14 +7,10 @@ public:
     node *left, *right;
     void set_data(string s, double n);
 };
-void node::set_data(string s, double n){
-    name = s;
-    score =n;
-}
 class my_tree{                                // Binary tree
-public:
     int node_count;                           // 현재 node 수
     node *root;                               // root를 가르키는 pointer
+public:
     my_tree();                                // 초기화
     int insert_root(node t);                  // root로 Node 내용 t 추가 -> empty 상태에서만 실행 가능
     int insert_left(string tname, node t);    // tname의 node 왼쪽에 t 추가
@@ -60,6 +56,10 @@ int main()
     thetree.print_data_postorder();
     
     return 0;  
+}
+void node::set_data(string s, double n){
+    name = s;
+    score =n;
 }
 my_tree::my_tree(){     // constructor: 초기 empty 상태 
     node_count = 0;
