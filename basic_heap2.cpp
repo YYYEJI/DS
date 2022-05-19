@@ -134,13 +134,13 @@ double my_heap::score_average(){
 }
 
 void my_heap::adjust(int t_root){
+    element tmp;
     double tmpkey;
     int child;
-    element tmp;
 
     tmp = h[t_root];              // root의 원소 저장
     tmpkey = h[t_root].score;     
-    child = 2*t_root;             // left를 child로 선택
+    child = t_root*2;             // left를 child로 선택
 
     while(child<=csize){
         if((child<csize)&&(h[child].score<h[child+1].score))
@@ -173,7 +173,7 @@ int delete_node(element e[], int troot, string tname, int n){
     int csize = n;
 
     for(int i = 0; i<csize; i++){
-        if(tname == e[i].name){ 
+        if(e[i].name == tname){ 
             t = e[i];
             parent = i;   // i번째 node 부터 조정
             break;        // 찾으면 for문 종료
