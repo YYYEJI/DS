@@ -34,7 +34,7 @@ class my_tree{
     void nonrecursive_inorder();                  //non-recursive inorder traversal
     void print_data_levelorder();
 };
-class nstack{                        // stack의 용도 : stack에 tree의 주소값을 저장해서 사용        
+class nstack{                                     // stack의 용도 : stack에 tree의 주소값을 저장해서 사용        
     node* s[SIZE];
     int top;
 public:
@@ -193,7 +193,6 @@ void my_tree::nonrecursive_inorder(){
 
 
 //level-order traversal algorithm
-
 void my_tree::print_data_levelorder(){
     my_queue a1;
     node *t;
@@ -206,7 +205,7 @@ void my_tree::print_data_levelorder(){
         if(a1.q_empty())
             return;
         t = a1.delete_q();
-        cout << t->name <<":" << t->score <<"\n"; // t.name과 같지 않다. 여태껏은 t.name 이런 식으로 했음 t가 pointer 변수이기 때문
+        cout << t->name <<":" << t->score <<"\n";
         if(t->left != NULL)
             a1.insert_q(t->left);
         if(t->right!= NULL)
@@ -214,7 +213,6 @@ void my_tree::print_data_levelorder(){
     }
 }
 
-// 이걸 내가 생각해내서 만들 수 있을까? tree 를 copy 하는 function
 node * make_copy(node *p)
 {
     node *t;
@@ -258,11 +256,16 @@ bool equal_test(node *p1 , node *p2)
         return false;
   */
     //확실하게 괄호를 쳐주길 원하구나
-    return (((p1 == NULL) && (p2==NULL)) || ((p1!=NULL) && (p2!=NULL) && (p1->name == p2 ->name) && (p1->score == p2->score) && equal_test(p1->left,p2->left) && equal_test(p1->right , p2->right)));
+    return (((p1 == NULL) && (p2==NULL)) || 
+            ((p1!=NULL) && (p2!=NULL) && 
+            (p1->name == p2 ->name) && 
+            (p1->score == p2->score) && 
+            equal_test(p1->left,p2->left) && 
+            equal_test(p1->right , p2->right)));
 }
 
 bool equal_test (my_tree t1 , my_tree t2){
-    //node count 수가 다르면 바로 false Return
+    //node_count 수가 다르면 바로 false return
     if (t1.node_count != t2.node_count)
         return false;
     return equal_test(t1.root , t2.root);
