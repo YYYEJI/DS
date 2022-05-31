@@ -12,10 +12,13 @@ int main(){
     int key;
 
     key = sequential_search(student, 80, 4);
-    cout<<"Name: "<<student[key].name<<"\nscore: "<<student[key].key<<endl;
+    cout<<"Name: "<<student[key].name;
+    cout<<"\nScore: "<<student[key].key<<endl;
 
+    cout<<"-----------"<<endl;
     key = binary_search(student, 100, 0, 3);
-    cout<<"Name: "<<student[key].name<<"\nscore: "<<student[key].key<<endl;
+    cout<<"Name: "<<student[key].name;
+    cout<<"\nScore: "<<student[key].key<<endl;
     return 0;
 }
 int sequential_search(element a[], int k, int n){
