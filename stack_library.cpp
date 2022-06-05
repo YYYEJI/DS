@@ -1,9 +1,9 @@
 // Stack class
 /*
 - empty stack 생성 
-  * stack <int>
-  * stack <double>
-  * stack <s_record>
+  * stack <int>         s1
+  * stack <double>      s2
+  * stack <s_record>    s3
   
 - stack class의 member functions
   * push(): 원소를 넣는 함수, void type
