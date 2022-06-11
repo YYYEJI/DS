@@ -3,6 +3,7 @@ using namespace std;
 class node{
 public:
     string name;
+    string n;
     double score;
     node *left, *right;
     void set_data(string s, double n);
