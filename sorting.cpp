@@ -31,10 +31,10 @@ int main() {
     int n = 12;
     // insertion_sort(s_list, n);
     // bubble_sort(s_list, n);
-    selection_sort(s_list, n);
+    // selection_sort(s_list, n);
     // quick_sort(s_list, 0, n-1);
     // merge_sort(s_list, n);
-    // heap_sort(s_list, n);
+    heap_sort(s_list, n);
     
     cout << "< The result of the sorting >" << endl;
     show_thelist(s_list, n);
@@ -47,29 +47,50 @@ s_record::s_record(string a, string b, double n) {
 }
 s_record::s_record() {
     s_id = "00000000";
-    name = "None  ";
+    name = "None";
     score = 0;
 }
 void insertion_sort(s_record a[], int n) {
     for(int i = 1; i < n; i++) {
-        s_record temp = a[i];
-        int k = i-1;      // temp 앞 원소
-        while ((k >= 0) && (a[k].s_id > temp.s_id)) {
+        s_record tmp = a[i];
+        int k = i-1;            // tmp 앞 원소
+        while ((k >= 0) && (a[k].s_id > tmp.s_id)) {
             a[k+1] = a[k];
             k--;
         }
-        a[k+1] = temp;
+        a[k+1] = tmp;
     }
 }
-
+void bubble_sort (s_record a[], int n) {
+    s_record tmp;
+    for (int j = n-1; j >= 1; j--)             // array 범위를 하나씩 줄여줌
+        for (int k = 0; k<j ; k++)             // 위에서 정의된 array 범위만큼 for문
+            if (a[k].s_id > a[k+1].s_id) {
+                tmp = a[k];
+                a[k] = a[k + 1];
+                a[k + 1] = tmp;
+            }
+}
+void selection_sort(s_record a[], int n) {
+    s_record tmp;
+    for (int j = 0; j < n; j++) {
+        int min_i = j;
+        for (int k = j + 1; k < n; k++)
+            if (a[k].s_id < a[min_i].s_id)
+                min_i = k;
+        tmp = a[j];
+        a[j] = a[min_i];
+        a[min_i] = tmp;
+    }
+}
 void quick_sort(s_record a[], int left, int right) {
-    s_record pivot, temp;
-    int i, j;
-    if (left >= right)
+    s_record pivot;                    // pivot은 array의 첫 번째 원소, pivot은 array key 값중 중간 값
+    int i, j;                          // left, right
+    if (left >= right)                 // 교차되면 종료
         return;
-    i = left;
+    i = left;                    
     j = right + 1;
-    pivot = a[left];
+    pivot = a[left];              
     do {
         do {
             i++;
@@ -77,80 +98,32 @@ void quick_sort(s_record a[], int left, int right) {
         do {
             j--;
         } while (a[j].s_id > pivot.s_id);                     // pivot 원소보다 크면 앞으로 전진
-        if(i < j)
+        if(i < j)                // 교차되면 swap 시키면 안됨.
             swap(a[i], a[j]);
     } while(i<j);
     swap(a[left], a[j]);
-    quick_sort(a, left, j-1);
-    quick_sort(a, j+1, right);
+    quick_sort(a, left, j-1);         // Pivot 원소를 기준으로 앞쪽 quict sort 수행 
+    quick_sort(a, j+1, right);        // Pivot 원소를 기준으로 뒷쪽 quict sort 수행 
 }
+void heap_sort(s_record a[], int n) {
+    int i;
+    s_record b[S_SIZE], tmp;
+    for (i = 0; i < n; i++)           // array 1번째부터 원소값 지정
+        b[i + 1] =  a[i];
 
-void bubble_sort (s_record a[], int n) {
-    s_record temp;
-    for (int j = n-1; j >= 1; j--)
-        for (int k = 0; k< j; k++)
-            if (a[k].s_id > a[k+1].s_id) {
-                temp = a[k];
-                a[k] = a[k + 1];
-                a[k + 1] = temp;
-            }
-}
+    for (i = n / 2; i > 0; i--)       // 초기 heap 구성
+        adjust(b, i, n);
 
-void selection_sort(s_record a[], int n) {
-    s_record temp;
-    for (int j = 0; j < n; j++) {
-        int min_i = j;
-        for (int k = j + 1; k < n; k++)
-            if (a[k].s_id < a[min_i].s_id)
-                min_i = k;
-        temp = a[j];
-        a[j] = a[min_i];
-        a[min_i] = temp;
+    for (i = n - 1; i > 0; i--) {     
+        tmp = b[1];                  // 마지막 값이랑 첫 번재 값 교환
+        b[1] = b[i + 1];
+        b[i + 1] = tmp;
+        adjust(b, 1, i);              // n-1번째까지 adjust
+    }
+    for(i = 0; i < n; i++) {          // array a로 copy
+        a[i] = b[i+1];
     }
 }
-
-void merge(s_record a[], s_record b[], int n1, int n2, int n3, int n4) {
-    int i, j, k, t;
-    i = n1;
-    j = n3;
-    k = n1;
-    while ((i <= n2) && (j <= n4)) {
-        if (a[i].s_id <= a[j].s_id)
-            b[k++] = a[i++];
-        else
-            b[k++] = a[j++];
-    }
-    if (i > n2)
-        for (t = j; t <= n4; t++)
-            b[t] = a[t];
-    else
-        for (t = i; t <= n2; t++)
-            b[k+t-i] = a[t];
-}
-
-void merge_pass(s_record a[], s_record b[], int n, int s) {
-    int i, j;
-    for (i = 0; i < (n - 2 * s + 1); i += 2 * s)
-        merge(a, b, i, i + s - 1, i + s, i + 2 * s - 1);
-    if (i + s  <= n)
-        merge(a, b, i, i + s - 1, i + s, n);
-    else
-        for (j=i; j<= n; j++)
-            b[j] = a[j];
-}
-
-void merge_sort(s_record a[], int n) {
-    int s = 1;
-    s_record b[S_SIZE];
-    
-    while(s < n) {
-        merge_pass(a, b, n-1, s);
-        s*=2;
-        merge_pass(b, a, n-1, s);
-        s*=2;
-    }
-}
-
 void adjust(s_record a[], int troot, int size) {
     string tmpkey;
     int child;
@@ -170,24 +143,45 @@ void adjust(s_record a[], int troot, int size) {
     }
     a[child/2] = tmp;
 }
-
-void heap_sort(s_record a[], int n) {
-    int i;
-    s_record b[S_SIZE], temp;
-    for (i = 0; i < n; i++)           // array 1번째부터 원소값 지정
-        b[i + 1] =  a[i];
-
-    for (i = n / 2; i > 0; i--)       // 초기 heap 구성
-        adjust(b, i, n);
-
-    for (i = n - 1; i > 0; i--) {     
-        temp = b[1];
-        b[1] = b[i + 1];
-        b[i + 1] = temp;
-        adjust(b, 1, i);
+void merge(s_record a[], s_record b[], int n1, int n2, int n3, int n4) {    // 이미 sort 된 array를 merge
+    int i, j, k, t;                                                         // a[] -> b[]
+    i = n1;
+    j = n3;
+    k = n1;
+    while ((i <= n2) && (j <= n4)) {       // 두 array 중 한 array가 한 쪽 끝에 닫지 않으면 while
+        if (a[i].s_id <= a[j].s_id)
+            b[k++] = a[i++];
+        else
+            b[k++] = a[j++];
     }
-    for(i = 0; i < n; i++) {
-        a[i] = b[i+1];
+    if (i > n2)                            // 두 번째 sort안 된 array copy
+        for (t = j; t <= n4; t++)
+            b[t] = a[t];
+    else                                   // 첫 번째 sort안 된 array copy
+        for (t = i; t <= n2; t++)
+            b[k+t-i] = a[t];
+}
+
+void merge_pass(s_record a[], s_record b[], int n, int s) {
+    int i, j;
+    for (i = 0; i < (n-2*s+1); i+=2*s )        // 전체사이즈-범위(2s)+1
+        merge(a, b, i, i+s-1, i+s, i+2*s-1);
+    if (i+s <= n)                             // 짜투리가 범위보다 클 때 
+        merge(a, b, i, i+s-1, i+s, n);
+    else                                      // 짜투리가 범위보다 작을 때
+        for (j=i; j<= n; j++)
+            b[j] = a[j];                      // copy
+}
+
+void merge_sort(s_record a[], int n) {
+    int s = 1;                                // array 범위
+    s_record b[S_SIZE];                       // 빈 array 생성
+    
+    while(s < n) {                           // 전체 구간보다 작으면
+        merge_pass(a, b, n-1, s);    
+        s*=2;                                // 범위 증가 (*=2)
+        merge_pass(b, a, n-1, s);
+        s*=2;                                // 범위 증가 (*=2)
     }
 }
 
