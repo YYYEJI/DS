@@ -145,9 +145,9 @@ void adjust(s_record a[], int troot, int size) {
 }
 void merge(s_record a[], s_record b[], int n1, int n2, int n3, int n4) {    // 이미 sort 된 array를 merge
     int i, j, k, t;                                                         // a[] -> b[]
-    i = n1;
-    j = n3;
-    k = n1;
+    i = n1;                                // 첫 번째 array의 첫 번째 index
+    j = n3;                                // 두 번째 array의 첫 번째 index
+    k = n1;                                // 빈 array의 첫 번재 index
     while ((i <= n2) && (j <= n4)) {       // 두 array 중 한 array가 한 쪽 끝에 닫지 않으면 while
         if (a[i].s_id <= a[j].s_id)
             b[k++] = a[i++];
@@ -159,7 +159,7 @@ void merge(s_record a[], s_record b[], int n1, int n2, int n3, int n4) {    // �
             b[t] = a[t];
     else                                   // 첫 번째 sort안 된 array copy
         for (t = i; t <= n2; t++)
-            b[k+t-i] = a[t];
+            b[k-i+t] = a[t];
 }
 
 void merge_pass(s_record a[], s_record b[], int n, int s) {
