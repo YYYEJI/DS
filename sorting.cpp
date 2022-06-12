@@ -176,11 +176,11 @@ void merge_sort(s_record a[], int n) {
     int s = 1;                                // array 범위
     s_record b[S_SIZE];                       // 빈 array 생성
     
-    while(s < n) {                           // 전체 구간보다 작으면
-        merge_pass(a, b, n-1, s);    
-        s*=2;                                // 범위 증가 (*=2)
+    while(s < n) {                            // 전체 구간보다 작으면
+        merge_pass(a, b, n-1, s);             // n-1, index가 하나 적음
+        s*=2;                                 // 범위 증가 (*=2)
         merge_pass(b, a, n-1, s);
-        s*=2;                                // 범위 증가 (*=2)
+        s*=2;                                 // 범위 증가 (*=2)
     }
 }
 
