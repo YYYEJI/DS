@@ -164,15 +164,14 @@ void merge(s_record a[], s_record b[], int n1, int n2, int n3, int n4) {    // �
 
 void merge_pass(s_record a[], s_record b[], int n, int s) {
     int i, j;
-    for (i = 0; i < (n-2*s+1); i+=2*s )        // 전체사이즈-범위(2s)+1
-        merge(a, b, i, i+s-1, i+s, i+2*s-1);
+    for (i = 0; i < (n-2*s+1); i+=2*s )       // 전체사이즈-범위(2s)+1
+        merge(a, b, i, i+s-1, i+s, i+2*s-1);  // i+s-1 -> 첫번째원소+array범위-1(since index)
     if (i+s <= n)                             // 짜투리가 범위보다 클 때 
         merge(a, b, i, i+s-1, i+s, n);
     else                                      // 짜투리가 범위보다 작을 때
-        for (j=i; j<= n; j++)
+        for (j=i; j<=n; j++)
             b[j] = a[j];                      // copy
 }
-
 void merge_sort(s_record a[], int n) {
     int s = 1;                                // array 범위
     s_record b[S_SIZE];                       // 빈 array 생성
