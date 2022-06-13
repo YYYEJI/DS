@@ -7,6 +7,7 @@
   
 - queue class의 member functions
   * push(): 원소를 넣는 함수, void type
+  * pop() : 원소를 삭제하는 함수, void type 임에 유의
   * front(): 현재 front 원소를 읽는 함수
   * back() : 현재 back(rear)원소를 읽는 함수
   * size(): 현재 원소 개수를 return 
