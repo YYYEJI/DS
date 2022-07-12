@@ -59,6 +59,7 @@ int main(){
     cout<<output;
     return 0;
 }
+
 IntoPost::IntoPost(){
     top = 0;
 }
